@@ -1,0 +1,7 @@
+---
+- name: restart blockchain gui
+  become: yes
+  systemd:
+    name: chia-blockchain-gui
+    state: restarted
+    daemon_reload: yes

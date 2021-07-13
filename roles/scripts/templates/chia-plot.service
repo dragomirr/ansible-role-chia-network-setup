@@ -1,0 +1,13 @@
+[Unit]
+Description=Chia plot script
+
+[Service]
+ExecStart=/opt/scripts/plot.sh
+Restart=on-failure
+User={{ ansible_user }}
+Group={{ ansible_user }}
+StandardOutput=append:/var/log/plot/plot.log
+StandardError=append:/var/log/plot/plot.error.log
+
+[Install]
+WantedBy=multi-user.target

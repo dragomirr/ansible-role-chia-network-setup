@@ -1,0 +1,34 @@
+---
+- name: run install script
+  shell: sh install.sh
+  args:
+    chdir: "{{ blockchain.directory }}"
+
+- name: run gui install script
+  shell: ". venv/bin/activate && sh install-gui.sh"
+  args:
+    chdir: "{{ blockchain.directory }}"
+  when: blockchain_install_gui
+
+- name: Set symlink in home
+  file:
+    src: "{{ plotter.directory }}"
+    dest: ~/chia-blockchain
+    state: link
+
+- name: copy gui desktop entry
+  become: yes
+  template:
+    src: chia-blockchain.desktop
+    dest: /usr/share/applications/chia-blockchain.desktop
+
+- name: create autostart directory
+  file:
+    path: ~/.config/autostart
+    state: directory
+
+- name: set gui autostart
+  file:
+    src: /usr/share/applications/chia-blockchain.desktop
+    dest: ~/.config/autostart/chia-blockchain.desktop
+    state: link

@@ -1,0 +1,43 @@
+---
+- hosts: ploters
+  gather_facts: yes
+
+  vars:
+    blockchain:
+      directory: /opt/chia-blockchain
+      version: latest
+    plotter:
+      directory: /opt/chia-plotter
+      version: 974d6e5f1440f68c48492122ca33828a98864dfc
+
+  pre_tasks:
+    - name: create directories
+      become: yes
+      file:
+        path: "{{ item }}"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_effective_group_id }}"
+        state: directory
+      loop:
+        - "{{ blockchain.directory }}"
+        - "{{ plotter.directory }}"
+
+  roles:
+    - role: dragomirr.git
+      git_repo:
+        - repo: https://github.com/Chia-Network/chia-blockchain
+          dest: "{{ blockchain.directory }}"
+          version: "{{ blockchain.version }}"
+          force: yes
+        - repo: https://github.com/madMAx43v3r/chia-plotter
+          dest: "{{ plotter.directory }}"
+          version: "{{ plotter.version }}"
+      tags:
+        - git
+        - setup
+
+    - role: blockchain
+      tags: blockchain
+
+    - role: plotter
+      tags: plotter

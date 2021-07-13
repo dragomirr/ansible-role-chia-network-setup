@@ -1,0 +1,31 @@
+---
+- name: install dependencies
+  become: yes
+  apt:
+    name:
+      - libsodium-dev
+      - cmake
+      - g++
+      - git
+      - build-essential
+    update_cache: yes
+  retries: 3
+  delay: 5
+
+- name: run make script
+  shell: bash make_devel.sh
+  args:
+    chdir: "{{ plotter.directory }}"
+
+- name: set plotter in PATH
+  become: yes
+  file:
+    src: "{{ plotter.directory }}/build/chia_plot"
+    dest: /usr/bin/chia_plot
+    state: link
+
+- name: set symlink in home
+  file:
+    src: "{{ plotter.directory }}"
+    dest: ~/chia-plotter
+    state: link

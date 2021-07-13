@@ -1,0 +1,33 @@
+---
+- name: create scripts directory
+  file:
+    path: /opt/scripts
+    state: directory
+    mode: 0755
+
+- name: create log directory
+  become: yes
+  file:
+    path: /var/log/plot
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+- name: copy scripts
+  template:
+    src: plot.sh
+    dest: /opt/scripts/plot.sh
+    mode: 0755
+
+- name: copy plot service
+  become: yes
+  template:
+    src: chia-plot.service
+    dest: /etc/systemd/system/chia-plot.service
+
+- name: ensure chia plot service is enabled and started
+  become: yes
+  systemd:
+    name: chia-plot
+    state: started
+    enabled: yes
