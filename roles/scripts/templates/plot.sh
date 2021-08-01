@@ -27,7 +27,7 @@ max_plot_number() {
 
 for disk in $disks; do
   plots=$(max_plot_number $disk)
-  if (( $plots > 0 )); then
+  if [[ -n $plots ]]; then
     # add plot directory
     $chia plots add -d $disk/
     # run plotting
