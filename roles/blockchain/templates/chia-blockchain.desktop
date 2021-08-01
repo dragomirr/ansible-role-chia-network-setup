@@ -3,6 +3,7 @@ Name=Chia Blockchain
 Comment=Gui for Chia Blockchain
 GenericName=Chia Blockchain
 Icon={{ blockchain.directory }}/chia-blockchain-gui/src/assets/img/chia.png
+Exec=/opt/scripts/start_gui.sh
 Type=Application
 StartupNotify=true
 Categories=GNOME;GTK;Utility;
