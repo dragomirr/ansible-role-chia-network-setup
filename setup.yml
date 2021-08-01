@@ -9,6 +9,8 @@
     plotter:
       directory: /opt/chia-plotter
       version: 974d6e5f1440f68c48492122ca33828a98864dfc
+    scripts:
+      directory: /opt/scripts
 
   pre_tasks:
     - name: create directories
@@ -21,6 +23,7 @@
       loop:
         - "{{ blockchain.directory }}"
         - "{{ plotter.directory }}"
+        - "{{ scripts.directory }}"
 
   roles:
     - role: dragomirr.git
@@ -35,6 +38,9 @@
       tags:
         - git
         - setup
+
+    - role: scripts
+      tags: scripts
 
     - role: blockchain
       tags: blockchain

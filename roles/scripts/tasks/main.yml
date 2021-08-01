@@ -11,12 +11,12 @@
     path: /var/log/plot
     state: directory
     owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    group: "{{ ansible_effective_group_id }}"
 
 - name: copy scripts
   template:
     src: "{{ item }}"
-    dest: /opt/scripts/{{ item }}
+    dest: "{{ scripts.directory }}/{{ item }}"
     mode: 0755
   loop:
     - plot.sh

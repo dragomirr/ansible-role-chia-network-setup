@@ -5,7 +5,7 @@ Description=Chia plot script
 ExecStart=/opt/scripts/plot.sh
 Restart=on-failure
 User={{ ansible_user }}
-Group={{ ansible_user }}
+Group={{ ansible_effective_group_id }}
 StandardOutput=append:/var/log/plot/plot.log
 StandardError=append:/var/log/plot/plot.error.log
 
