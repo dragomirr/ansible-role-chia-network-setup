@@ -1,5 +1,7 @@
 [Unit]
 Description=Chia plot script
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 ExecStart=/opt/scripts/plot.sh
