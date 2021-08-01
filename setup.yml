@@ -39,11 +39,11 @@
         - git
         - setup
 
-    - role: scripts
-      tags: scripts
-
     - role: blockchain
       tags: blockchain
 
     - role: plotter
       tags: plotter
+
+    - role: scripts
+      tags: scripts
