@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 ExecStart=/opt/scripts/plot.sh
-Restart=always
+Restart=on-failure
 User={{ ansible_user }}
 Group={{ ansible_effective_group_id }}
 StandardOutput=append:/var/log/plot/plot.log
