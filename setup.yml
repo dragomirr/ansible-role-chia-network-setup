@@ -24,6 +24,14 @@
         - "{{ blockchain.directory }}"
         - "{{ plotter.directory }}"
         - "{{ scripts.directory }}"
+    - name: install tools
+      become: yes
+      apt:
+        name:
+          - curl
+          - ansible
+          - mdadm
+        update_cache: yes
 
   roles:
     - role: dragomirr.git
