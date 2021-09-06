@@ -8,7 +8,7 @@
       version: latest
     plotter:
       directory: /opt/chia-plotter
-      version: 974d6e5f1440f68c48492122ca33828a98864dfc
+      version: a9a49031ac03504b272b7199ef3e071c2d93e9cc
     scripts:
       directory: /opt/scripts
 
